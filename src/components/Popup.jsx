@@ -1,102 +1,181 @@
-
 "use client";
 
-export default function Popup({ isOpen, onClose }) {
+import { useState } from "react";
+import { openEnquiryWhatsApp, submitEnquiry } from "@/lib/enquiry";
+
+export default function Popup({
+  isOpen,
+  onClose,
+  initialValues = {},
+  product,
+}) {
+  const [submitting, setSubmitting] = useState(false);
+  const [formStatus, setFormStatus] = useState("");
+
+  const productName =
+    typeof product === "string"
+      ? product
+      : product?.name || product?.title;
+
+  const initialMessage =
+    initialValues.message ||
+    (productName ? `I want to enquire about: ${productName}` : "");
+
   if (!isOpen) return null;
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    setSubmitting(true);
+    setFormStatus("");
+
+    const form = e.currentTarget;
+    const values = Object.fromEntries(new FormData(form));
+
+    try {
+      const enquiry = {
+        ...values,
+        product: productName || "N/A",
+      };
+
+      await submitEnquiry(enquiry);
+
+      setFormStatus("Your enquiry has been submitted successfully!");
+
+      openEnquiryWhatsApp(enquiry);
+
+      form.reset();
+
+      setTimeout(() => {
+        onClose();
+      }, 3000);
+    } catch (error) {
+      console.error("Enquiry submission failed:", error);
+
+      setFormStatus(
+        error.message === "Enter a valid 10-digit phone number."
+          ? error.message
+          : "Failed to send. Please try again."
+      );
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   return (
     <div
-      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/75 px-4 py-6 overflow-y-auto"
+      className="fixed inset-0 z-[9999] flex items-center justify-center overflow-y-auto bg-black/75 px-3 py-5 sm:px-4 sm:py-6"
       onClick={(e) => {
         if (e.target === e.currentTarget) {
           onClose();
         }
       }}
     >
-      {/* POPUP */}
+      {/* POPUP CONTAINER */}
       <div
-        className="relative my-auto w-full max-w-[610px] min-h-[520px] bg-[#8b8b8b] border border-red-500 overflow-hidden"
+        className="relative isolate my-auto w-full max-w-[610px] min-h-[520px] overflow-hidden border border-red-500"
         style={{
-          borderTopLeftRadius: "100px",
-          borderBottomRightRadius: "100px",
+          borderTopLeftRadius: "clamp(35px, 8vw, 100px)",
+          borderBottomRightRadius: "clamp(35px, 8vw, 100px)",
         }}
       >
+        {/* BACKGROUND IMAGE */}
+        <div
+          className="absolute inset-0 -z-20 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: "url('/images/popup-bg.webp')",
+          }}
+        />
+
+        {/* BLACK OVERLAY */}
+        <div className="absolute inset-0 -z-10 bg-black/65" />
+
         {/* CLOSE BUTTON */}
         <button
           type="button"
           onClick={onClose}
           aria-label="Close popup"
-          className="absolute top-[16px] right-[17px] z-20 text-white text-[25px] font-light leading-none hover:text-red-200 transition-colors cursor-pointer"
+          className="absolute right-4 top-4 z-30 cursor-pointer text-[28px] font-light leading-none text-white transition-colors hover:text-red-300 sm:right-[17px] sm:top-[16px]"
         >
           ×
         </button>
 
         {/* FORM AREA */}
-        <div className="w-full flex justify-end">
-          <div className="w-full max-w-[290px] mr-[18px] pt-[25px] pb-[26px]">
-
+        <div className="relative z-10 flex w-full justify-center px-4 sm:justify-end sm:px-0">
+          <div className="mx-auto w-full max-w-[290px] py-[25px] sm:mx-0 sm:mr-[18px] sm:pb-[26px] sm:pt-[25px]">
             {/* TITLE */}
-            <h2 className="text-white text-[30px] font-bold text-center mb-[20px] tracking-tight">
+            <h2 className="mb-[20px] text-center text-[28px] font-bold tracking-tight text-white sm:text-[30px]">
               Get a Quote
             </h2>
 
-            {/* NAME */}
-            <input
-              type="text"
-              name="name"
-              placeholder="Your Name"
-              className="w-full h-[46px] bg-white border border-gray-500 px-4 text-[15px] text-gray-700 outline-none placeholder:text-gray-500 mb-[16px]"
-            />
+            {/* ENQUIRY FORM */}
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <input
+                type="text"
+                name="name"
+                placeholder="Your Name"
+                autoComplete="name"
+                defaultValue={initialValues.name || ""}
+                required
+                className="h-[46px] w-full border border-gray-300 bg-white px-4 text-[15px] text-gray-700 outline-none placeholder:text-gray-500 focus:border-red-500"
+              />
 
-            {/* EMAIL */}
-            <input
-              type="email"
-              name="email"
-              placeholder="Email ID"
-              className="w-full h-[46px] bg-white border border-gray-500 px-4 text-[15px] text-gray-700 outline-none placeholder:text-gray-500 mb-[16px]"
-            />
-
-            {/* PHONE */}
-            <div className="w-full h-[46px] bg-white border border-gray-500 flex items-center mb-[16px]">
-              <div className="flex items-center gap-1 px-2 h-full border-r border-gray-200">
-                <span className="text-[20px] leading-none">
-                  🇮🇳
-                </span>
-                <span className="text-gray-500 text-[11px]">
-                  ▾
-                </span>
-              </div>
+              <input
+                type="email"
+                name="email"
+                placeholder="Email ID"
+                autoComplete="email"
+                defaultValue={initialValues.email || ""}
+                required
+                className="h-[46px] w-full border border-gray-300 bg-white px-4 text-[15px] text-gray-700 outline-none placeholder:text-gray-500 focus:border-red-500"
+              />
 
               <input
                 type="tel"
                 name="phone"
-                placeholder="081234 56789"
-                className="flex-1 min-w-0 h-full bg-transparent px-3 text-[15px] text-gray-700 outline-none placeholder:text-gray-500"
+                placeholder="10-digit phone number"
+                autoComplete="tel"
+                defaultValue={initialValues.phone || ""}
+                required
+                className="h-[46px] w-full border border-gray-300 bg-white px-4 text-[15px] text-gray-700 outline-none placeholder:text-gray-500 focus:border-red-500"
               />
-            </div>
 
-            {/* PLACE */}
-            <input
-              type="text"
-              name="place"
-              placeholder="Place"
-              className="w-full h-[46px] bg-white border border-gray-500 px-4 text-[15px] text-gray-700 outline-none placeholder:text-gray-500 mb-[16px]"
-            />
+              <input
+                type="text"
+                name="place"
+                placeholder="Place"
+                autoComplete="address-level2"
+                defaultValue={initialValues.place || ""}
+                className="h-[46px] w-full border border-gray-300 bg-white px-4 text-[15px] text-gray-700 outline-none placeholder:text-gray-500 focus:border-red-500"
+              />
 
-            {/* MESSAGE */}
-            <textarea
-              name="message"
-              placeholder="Your Message"
-              className="w-full h-[103px] bg-white border border-gray-500 px-4 py-2 text-[15px] text-gray-700 outline-none resize-none placeholder:text-gray-500 mb-[15px]"
-            />
+              <textarea
+                name="message"
+                placeholder="Your Message"
+                defaultValue={initialMessage}
+                className="h-[103px] w-full resize-none border border-gray-300 bg-white px-4 py-2 text-[15px] text-gray-700 outline-none placeholder:text-gray-500 focus:border-red-500"
+              />
 
-            {/* SUBMIT */}
-            <button
-              type="button"
-              className="w-full h-[53px] bg-[#e10d08] hover:bg-[#c90905] text-white text-[16px] font-medium rounded-[4px] transition-colors cursor-pointer"
-            >
-              Submit Your Request
-            </button>
+              {/* FORM STATUS */}
+              {formStatus && (
+                <p
+                  role="status"
+                  aria-live="polite"
+                  className="text-sm leading-5 text-white"
+                >
+                  {formStatus}
+                </p>
+              )}
+
+              {/* SUBMIT BUTTON */}
+              <button
+                type="submit"
+                disabled={submitting}
+                className="h-[53px] w-full cursor-pointer rounded-[4px] bg-[#e10d08] text-[16px] font-medium text-white transition-colors hover:bg-[#c90905] disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                {submitting ? "Submitting..." : "Submit Your Request"}
+              </button>
+            </form>
           </div>
         </div>
       </div>

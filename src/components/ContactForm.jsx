@@ -1,14 +1,18 @@
 "use client";
 
 import { useState } from "react";
+import { openEnquiryWhatsApp, submitEnquiry } from "@/lib/enquiry";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    phone: "",
     place: "",
     message: "",
   });
+  const [submitting, setSubmitting] = useState(false);
+  const [formStatus, setFormStatus] = useState("");
 
   const handleChange = (e) => {
     setFormData({
@@ -17,19 +21,36 @@ export default function ContactForm() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setSubmitting(true);
+    setFormStatus("");
 
-    console.log("Contact form:", formData);
-
-    alert("Thank you! Your message has been sent.");
-
-    setFormData({
-      name: "",
-      email: "",
-      place: "",
-      message: "",
-    });
+    try {
+      const enquiry = {
+        ...formData,
+        product: "N/A",
+      };
+      await submitEnquiry(enquiry);
+      setFormStatus("Your enquiry has been submitted successfully!");
+      openEnquiryWhatsApp(enquiry);
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        place: "",
+        message: "",
+      });
+    } catch (error) {
+      console.error("Enquiry submission failed:", error);
+      setFormStatus(
+        error.message === "Enter a valid 10-digit phone number."
+          ? error.message
+          : "Failed to send. Please try again."
+      );
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -130,25 +151,48 @@ export default function ContactForm() {
                 </div>
               </div>
 
-              {/* Place */}
-              <div>
-                <label
-                  htmlFor="contact-place"
-                  className="mb-2 block text-sm font-medium text-gray-700"
-                >
-                  City / Place
-                </label>
+              {/* Phone and Place */}
+              <div className="grid gap-5 sm:grid-cols-2">
+                <div>
+                  <label
+                    htmlFor="contact-phone"
+                    className="mb-2 block text-sm font-medium text-gray-700"
+                  >
+                    Your Phone
+                  </label>
 
-                <input
-                  id="contact-place"
-                  type="text"
-                  name="place"
-                  value={formData.place}
-                  onChange={handleChange}
-                  placeholder="Enter your city or place"
-                  autoComplete="address-level2"
-                  className="w-full rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 text-gray-800 outline-none transition placeholder:text-gray-400 focus:border-red-500 focus:bg-white focus:ring-2 focus:ring-red-100"
-                />
+                  <input
+                    id="contact-phone"
+                    type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    placeholder="Enter your 10-digit phone number"
+                    autoComplete="tel"
+                    required
+                    className="w-full rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 text-gray-800 outline-none transition placeholder:text-gray-400 focus:border-red-500 focus:bg-white focus:ring-2 focus:ring-red-100"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="contact-place"
+                    className="mb-2 block text-sm font-medium text-gray-700"
+                  >
+                    City / Place
+                  </label>
+
+                  <input
+                    id="contact-place"
+                    type="text"
+                    name="place"
+                    value={formData.place}
+                    onChange={handleChange}
+                    placeholder="Enter your city or place"
+                    autoComplete="address-level2"
+                    className="w-full rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 text-gray-800 outline-none transition placeholder:text-gray-400 focus:border-red-500 focus:bg-white focus:ring-2 focus:ring-red-100"
+                  />
+                </div>
               </div>
 
               {/* Message */}
@@ -171,12 +215,19 @@ export default function ContactForm() {
                 />
               </div>
 
+              {formStatus && (
+                <p role="status" className="text-sm text-gray-700">
+                  {formStatus}
+                </p>
+              )}
+
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full rounded-lg bg-red-700 px-8 py-3.5 font-semibold text-white shadow-md transition duration-300 hover:bg-red-800 hover:shadow-lg sm:w-auto"
+                disabled={submitting}
+                className="w-full rounded-lg bg-red-700 px-8 py-3.5 font-semibold text-white shadow-md transition duration-300 hover:bg-red-800 hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
               >
-                Submit Your Request
+                {submitting ? "Submitting..." : "Submit Your Request"}
               </button>
             </form>
           </div>

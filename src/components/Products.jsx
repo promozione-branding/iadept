@@ -2,6 +2,7 @@
 "use client";
 
 import { useState } from "react";
+import { openEnquiryWhatsApp, submitEnquiry } from "@/lib/enquiry";
 
 const products = [
   {
@@ -85,15 +86,20 @@ export default function Products() {
     setFormStatus("");
 
     try {
-      // Connect your existing API here.
-      // This currently does not submit data to a server.
-      console.log("Quote request:", formData);
-
+      await submitEnquiry({
+        ...formData,
+        product: "N/A",
+      });
+      setFormStatus("Your enquiry has been submitted successfully!");
+      openEnquiryWhatsApp({ ...formData, product: "N/A" });
+      setFormData(initialFormData);
+    } catch (error) {
+      console.error("Enquiry submission failed:", error);
       setFormStatus(
-        "Please connect your enquiry API to submit this request."
+        error.message === "Enter a valid 10-digit phone number."
+          ? error.message
+          : "Failed to send. Please try again."
       );
-    } catch {
-      setFormStatus("Something went wrong. Please try again.");
     } finally {
       setSubmitting(false);
     }
@@ -227,6 +233,7 @@ export default function Products() {
                   onChange={handleChange}
                   placeholder="Phone Number"
                   autoComplete="tel"
+                  required
                   className="w-full rounded-lg border border-red-700 bg-red-800/50 px-4 py-3 text-white placeholder-red-200 outline-none focus:ring-2 focus:ring-white/50"
                 />
 

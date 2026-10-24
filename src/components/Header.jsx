@@ -91,103 +91,74 @@ export default function Header() {
             </div>
           </div>
 
-          {/* MOBILE HEADER */}
-          <div className="lg:hidden">
-            <div className="flex h-[72px] items-center justify-between px-4">
-              {/* LOGO */}
-              <Link href="/" className="flex items-center">
-                <img
-                  src="/logo-1 (1).webp"
-                  alt="i-Adept Marketing"
-                  className="max-h-[55px] max-w-[190px] object-contain"
-                />
-              </Link>
+       {/* MOBILE HEADER */}
+<div className="lg:hidden">
+  <div className="flex h-[72px] items-center justify-between px-4">
+    {/* LOGO */}
+    <Link href="/" className="flex items-center">
+      <img
+        src="/logo-1 (1).webp"
+        alt="i-Adept Marketing"
+        className="max-h-[55px] max-w-[190px] object-contain"
+      />
+    </Link>
 
-              {/* MOBILE MENU BUTTON */}
-              <button
-                type="button"
-                onClick={() => setIsOpen((prev) => !prev)}
-                className="flex h-11 w-11 items-center justify-center text-gray-800"
-                aria-label={isOpen ? "Close menu" : "Open menu"}
-                aria-expanded={isOpen}
-              >
-                {isOpen ? (
-                  <svg
-                    width="27"
-                    height="27"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.8"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M6 6l12 12M18 6L6 18"
-                    />
-                  </svg>
-                ) : (
-                  <svg
-                    width="28"
-                    height="28"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.8"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M4 7h16M4 12h16M4 17h16"
-                    />
-                  </svg>
-                )}
-              </button>
-            </div>
+    {/* MOBILE MENU BUTTON */}
+    <button
+      type="button"
+      onClick={() => setIsOpen((prev) => !prev)}
+      className="flex h-11 w-11 items-center justify-center text-gray-800"
+      aria-label={isOpen ? "Close menu" : "Open menu"}
+      aria-expanded={isOpen}
+    >
+      {isOpen ? (
+        <svg
+          width="27"
+          height="27"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.8"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M6 6l12 12M18 6L6 18"
+          />
+        </svg>
+      ) : (
+        <svg
+          width="28"
+          height="28"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.8"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M4 7h16M4 12h16M4 17h16"
+          />
+        </svg>
+      )}
+    </button>
+  </div>
 
-            {/* GST */}
-            <div className="px-4 pb-2">
-              <p className="text-[11px] text-gray-700">
-                GST: 07ABXPN5874D1Z1
-              </p>
-            </div>
+  {/* GST - LOGO KE BILKUL PAAS */}
+  <div className="px-4 pb-1">
+    <p className="text-[11px] leading-none text-gray-700">
+      GST: 07ABXPN5874D1Z1
+    </p>
+  </div>
 
-            {/* MOBILE MENU */}
-            {isOpen && (
-              <div className="border-t border-gray-200 bg-white px-4 py-4">
-                <nav className="flex flex-col">
-                  {navLinks.map((link) => (
-                    <Link
-                      key={link.name}
-                      href={link.href}
-                      onClick={() => setIsOpen(false)}
-                      className={`border-b border-gray-100 py-3 text-[16px] ${
-                        link.active
-                          ? "text-red-600"
-                          : "text-gray-800 hover:text-red-600"
-                      }`}
-                    >
-                      {link.name}
-                    </Link>
-                  ))}
-
-                  {/* MOBILE GET A QUOTE */}
-                  <button
-                    type="button"
-                    onClick={openQuote}
-                    className="relative mt-5 flex h-[52px] w-full max-w-[190px] cursor-pointer items-center justify-between bg-[#d5231f] px-5 text-[13px] font-bold text-white"
-                    style={{
-                      clipPath:
-                        "polygon(0 0, 90% 0, 100% 50%, 90% 100%, 0 100%)",
-                    }}
-                  >
-                    <span>GET A QUOTE</span>
-                    <span className="text-[21px]">→</span>
-                  </button>
-                </nav>
-              </div>
-            )}
-          </div>
+  {/* MOBILE MENU */}
+  {isOpen && (
+    <div className="border-t border-gray-200 bg-white px-4 py-4">
+      {/* ...your existing menu... */}
+    </div>
+  )}
+</div>
         </div>
       </header>
 

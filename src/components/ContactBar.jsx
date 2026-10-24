@@ -122,10 +122,11 @@ export default function Contactbar() {
 
   return (
     <>
-      <footer className="relative mt-16 w-full bg-[#c91f1b] px-3 pb-0 pt-0 sm:px-5 lg:px-7">
+      <footer className="relative mt-2 sm:mt-30 w-full bg-[#c91f1b] px-2 pb-0 pt-0 
+      sm:px-5 lg:px-3">
         {/* TOP CONTACT BAR */}
-        <div className="relative z-10 mx-auto -translate-y-1/2 rounded-[50px] bg-white px-5 py-10 sm:px-8 md:px-10 lg:px-12">
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-5 lg:gap-8">
+        <div className="relative z-10 mx-auto  rounded-[50px] bg-white px-5 py-10 sm:px-8 md:px-10 lg:px-12">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-5 lg:gap-8">
             {contactDetails.map((item) => (
               <ContactItem key={item.title} item={item} />
             ))}
@@ -133,7 +134,7 @@ export default function Contactbar() {
         </div>
 
         {/* COMPANY INFORMATION */}
-        <div className="-mt-10 pb-8 pt-2 text-center sm:pb-10">
+        <div className="mt-10 pb-8 pt-2 text-center sm:pb-10">
           {/* Logo */}
           <div className="mx-auto mb-5 flex min-h-10 w-full max-w-[480px] items-center justify-center rounded-xl bg-white px-4 py-2">
             <img
