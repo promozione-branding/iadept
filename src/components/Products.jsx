@@ -157,17 +157,18 @@ export default function Products() {
                         src={product.image}
                         alt={product.name}
                         loading="lazy"
-                        className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
+                        className="h-full w-full object-contain transition-transform duration-500 
+                        group-hover:scale-105"
                       />
                     </button>
 
                     {/* PRODUCT DETAILS */}
                     <div className="flex flex-1 flex-col border-t border-gray-100 p-3 sm:p-4">
-                      <h3 className="line-clamp-3 min-h-[60px] text-xs font-semibold leading-5 text-gray-800 sm:text-sm">
+                      <h3 className="line-clamp-3 min-h-[50px] text-xs font-semibold leading-5 text-gray-800 sm:text-sm">
                         {product.name}
                       </h3>
 
-                      <div className="mt-auto space-y-2 pt-4">
+                      <div className="mt-0 space-y-2 pt-4">
                         {/* WHATSAPP BUTTON — UNCHANGED */}
                         <a
                           href={whatsappLink(product.name)}

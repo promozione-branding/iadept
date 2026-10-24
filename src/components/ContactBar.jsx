@@ -86,7 +86,7 @@ export function FloatingContactButtons() {
   return (
     <div
       className="
-        fixed right-2 top-1/2 z-[9999]
+        fixed right-2 bottom-5 z-[9999]
         flex -translate-y-1/2 flex-col items-center
         gap-3 rounded-[20px] bg-white px-2 py-3 shadow-lg
         sm:right-3
