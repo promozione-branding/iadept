@@ -17,47 +17,49 @@ export default function Header() {
     { name: "Contact Us", href: "#contact" },
   ];
 
+  // Open quote popup
   const openQuote = () => {
-    setQuoteOpen(true);
     setIsOpen(false);
+    setQuoteOpen(true);
   };
 
+  // Close quote popup
   const closeQuote = () => {
     setQuoteOpen(false);
   };
 
   return (
     <>
-      <header className="sticky top-0 z-50 bg-white border-t border-gray-200">
+      <header className="sticky top-0 z-50 border-t border-gray-200 bg-white">
         <div className="w-full">
           {/* DESKTOP HEADER */}
-          <div className="hidden lg:flex items-start h-[92px]">
+          <div className="hidden h-[92px] items-start lg:flex">
             {/* LOGO */}
             <div className="relative shrink-0">
               <Link
                 href="/"
-                className="flex items-center h-[70px] w-[232px] rounded-r-full border border-gray-500 border-l-0 px-3"
+                className="flex h-[70px] w-[232px] items-center rounded-r-full border border-l-0 border-gray-500 px-3"
               >
                 <img
                   src="/logo-1 (1).webp"
                   alt="i-Adept Marketing"
-                  className="w-auto h-auto max-w-[210px] max-h-[58px] object-contain"
+                  className="h-auto max-h-[58px] w-auto max-w-[210px] object-contain"
                 />
               </Link>
 
-              <p className="absolute left-[39px] top-[72px] text-[14px] font-semibold text-gray-700 whitespace-nowrap">
+              <p className="absolute left-[39px] top-[72px] whitespace-nowrap text-[14px] font-semibold text-gray-700">
                 GST: 07ABXPN5874D1Z1
               </p>
             </div>
 
             {/* NAVIGATION */}
-            <nav className="flex-1 flex items-center justify-center h-[70px]">
+            <nav className="flex h-[70px] flex-1 items-center justify-center">
               <div className="flex items-center gap-[42px]">
                 {navLinks.map((link) => (
                   <Link
                     key={link.name}
                     href={link.href}
-                    className={`text-[18px] font-semibold whitespace-nowrap transition-colors ${
+                    className={`whitespace-nowrap text-[18px] font-semibold transition-colors ${
                       link.active
                         ? "text-red-600"
                         : "text-black hover:text-red-600"
@@ -69,12 +71,12 @@ export default function Header() {
               </div>
             </nav>
 
-            {/* GET A QUOTE */}
-            <div className="w-[280px] h-[70px] flex items-center justify-center">
+            {/* DESKTOP GET A QUOTE */}
+            <div className="flex h-[70px] w-[280px] items-center justify-center">
               <button
                 type="button"
                 onClick={openQuote}
-                className="relative flex items-center justify-between w-[178px] h-[59px] bg-[#d5231f] text-white pl-[25px] pr-[27px] text-[13px] font-bold group cursor-pointer"
+                className="group relative flex h-[59px] w-[178px] cursor-pointer items-center justify-between bg-[#d5231f] pl-[25px] pr-[27px] text-[13px] font-bold text-white"
                 style={{
                   clipPath:
                     "polygon(0 0, 90% 0, 100% 50%, 90% 100%, 0 100%)",
@@ -91,22 +93,22 @@ export default function Header() {
 
           {/* MOBILE HEADER */}
           <div className="lg:hidden">
-            <div className="flex items-center justify-between h-[72px] px-4">
+            <div className="flex h-[72px] items-center justify-between px-4">
               {/* LOGO */}
               <Link href="/" className="flex items-center">
                 <img
                   src="/logo-1 (1).webp"
                   alt="i-Adept Marketing"
-                  className="max-w-[190px] max-h-[55px] object-contain"
+                  className="max-h-[55px] max-w-[190px] object-contain"
                 />
               </Link>
 
               {/* MOBILE MENU BUTTON */}
               <button
                 type="button"
-                onClick={() => setIsOpen(!isOpen)}
-                className="w-11 h-11 flex items-center justify-center text-gray-800"
-                aria-label="Toggle menu"
+                onClick={() => setIsOpen((prev) => !prev)}
+                className="flex h-11 w-11 items-center justify-center text-gray-800"
+                aria-label={isOpen ? "Close menu" : "Open menu"}
                 aria-expanded={isOpen}
               >
                 {isOpen ? (
@@ -159,7 +161,7 @@ export default function Header() {
                       key={link.name}
                       href={link.href}
                       onClick={() => setIsOpen(false)}
-                      className={`py-3 text-[16px] border-b border-gray-100 ${
+                      className={`border-b border-gray-100 py-3 text-[16px] ${
                         link.active
                           ? "text-red-600"
                           : "text-gray-800 hover:text-red-600"
@@ -173,7 +175,7 @@ export default function Header() {
                   <button
                     type="button"
                     onClick={openQuote}
-                    className="relative mt-5 flex items-center justify-between w-full max-w-[190px] h-[52px] bg-[#d5231f] text-white px-5 text-[13px] font-bold cursor-pointer"
+                    className="relative mt-5 flex h-[52px] w-full max-w-[190px] cursor-pointer items-center justify-between bg-[#d5231f] px-5 text-[13px] font-bold text-white"
                     style={{
                       clipPath:
                         "polygon(0 0, 90% 0, 100% 50%, 90% 100%, 0 100%)",
@@ -189,10 +191,11 @@ export default function Header() {
         </div>
       </header>
 
-      {/* SEPARATE QUOTE POPUP COMPONENT */}
+      {/* CONNECTED REUSABLE POPUP */}
       <Popup
         isOpen={quoteOpen}
         onClose={closeQuote}
+        title="Get a Quote"
       />
     </>
   );

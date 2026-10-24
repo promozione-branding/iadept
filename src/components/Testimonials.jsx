@@ -27,9 +27,11 @@ const testimonials = [
 export default function Testimonials() {
   const [current, setCurrent] = useState(0);
 
-  const visibleCount = 2;
+  // Desktop = 2 cards
+  // Mobile = 1 card
+  const desktopVisibleCount = 2;
 
-  const maxIndex = testimonials.length - visibleCount;
+  const maxIndex = testimonials.length - desktopVisibleCount;
 
   const prev = () => {
     setCurrent((c) => (c <= 0 ? maxIndex : c - 1));
@@ -76,12 +78,23 @@ export default function Testimonials() {
 
         {/* Testimonials */}
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8">
-          {testimonials
-            .slice(current, current + visibleCount)
-            .map((t) => (
+          {testimonials.map((t, index) => {
+            // Desktop: show current + next 2
+            const isDesktopVisible =
+              index >= current && index < current + desktopVisibleCount;
+
+            return (
               <div
                 key={t.id}
-                className="flex h-full flex-col rounded-2xl border border-white/15 bg-white/[0.96] p-6 shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:border-red-400/60 sm:p-8 lg:p-9"
+                className={`
+                  flex h-full flex-col rounded-2xl border border-white/15
+                  bg-white/[0.96] p-6 shadow-2xl
+                  transition-all duration-300
+                  hover:-translate-y-1 hover:border-red-400/60
+                  sm:p-8 lg:p-9
+                  ${isDesktopVisible ? "md:flex" : "md:hidden"}
+                  ${index === current ? "flex" : "hidden"}
+                `}
               >
                 {/* Quote and Rating */}
                 <div className="mb-6 flex items-center justify-between">
@@ -122,7 +135,8 @@ export default function Testimonials() {
                   </div>
                 </div>
               </div>
-            ))}
+            );
+          })}
         </div>
 
         {/* Navigation */}
@@ -138,7 +152,7 @@ export default function Testimonials() {
 
           {/* Dots */}
           <div className="flex items-center gap-2">
-            {Array.from({ length: maxIndex + 1 }).map((_, i) => (
+            {testimonials.map((_, i) => (
               <button
                 key={i}
                 type="button"

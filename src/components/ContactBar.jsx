@@ -88,7 +88,8 @@ export function FloatingContactButtons() {
   const whatsappNumber = "919810010218";
 
   return (
-    <div className="fixed right-2 top-1/2 z-[9999] flex -translate-y-1/2 flex-col items-center gap-3 rounded-[20px] bg-white px-2 py-3 shadow-lg sm:right-3">
+    <div className="fixed right-2 top-1/2 z-[9999] flex -translate-y-1/2 
+    flex-col items-center gap-3 rounded-[20px] bg-white px-2 py-3 shadow-lg sm:right-3">
       {/* Call button */}
       <a
         href={`tel:+${phoneNumber}`}
@@ -106,9 +107,9 @@ export function FloatingContactButtons() {
         rel="noopener noreferrer"
         aria-label="Chat on WhatsApp"
         title="Chat on WhatsApp"
-        className="flex h-10 w-10 items-center justify-center rounded-full bg-[#25d366] text-white transition-transform duration-200 hover:scale-110 sm:h-11 sm:w-11"
+       
       >
-        <MessageCircle size={25} fill="white" stroke="#25d366" />
+       <img className="w-[40px]" src="WhatsApp.svg-1-1.avif" alt="" />
       </a>
     </div>
   );
@@ -150,13 +151,7 @@ export default function Contactbar() {
             serving industries across India and globally.
           </p>
 
-          {/* CTA */}
-          <a
-            href="/contact"
-            className="mt-5 inline-flex min-h-11 items-center justify-center bg-white px-5 py-3 text-base font-normal text-[#c91f1b] transition-colors duration-300 hover:bg-[#f4f4f4] sm:px-6"
-          >
-            Need More Information
-          </a>
+        
         </div>
 
         {/* COPYRIGHT BAR */}

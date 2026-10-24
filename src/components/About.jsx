@@ -30,12 +30,45 @@ export default function About() {
             and smarter decisions.
           </p>
 
-          <Link
-            href="#contact"
-            className="inline-flex items-center px-6 py-3 bg-red-700 hover:bg-red-800 text-white font-semibold rounded-md transition-colors"
-          >
-            Learn More
-          </Link>
+         
+{/* Bulk Pricing Buttons */}
+<div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
+  {/* Get Bulk Pricing */}
+  <Link
+    href="#contact"
+    className="inline-flex min-h-[56px] items-center justify-center gap-3 rounded-lg bg-[#477f00] px-6 py-4 text-sm font-bold tracking-wide text-white transition-all duration-300 hover:bg-[#386600] sm:min-w-[245px] sm:text-base"
+  >
+    GET BULK PRICING
+    <span className="text-xl leading-none">↓</span>
+  </Link>
+
+  {/* WhatsApp Bulk */}
+  <a
+    href="https://wa.me/919810010218?text=Hello%2C%20I%20am%20interested%20in%20bulk%20pricing."
+    target="_blank"
+    rel="noopener noreferrer"
+    className="inline-flex min-h-[56px] items-center justify-center gap-3 rounded-lg bg-[#14231e] px-6 py-4 text-sm font-bold tracking-wide text-white transition-all duration-300 hover:bg-[#203b30] sm:min-w-[230px] sm:text-base"
+  >
+    WHATSAPP BULK
+
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20l1.2-5.3A8.4 8.4 0 1 1 21 11.5Z" />
+      <path d="M9 9a3 3 0 0 0 6 6" />
+    </svg>
+  </a>
+</div>
+
         </div>
 
          <div>
