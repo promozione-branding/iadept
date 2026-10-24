@@ -64,7 +64,8 @@ export default function Popup({
 
   return (
     <div
-      className="fixed inset-0 z-[9999] flex items-center justify-center overflow-y-auto bg-black/75 px-3 py-5 sm:px-4 sm:py-6"
+      className="fixed inset-0 z-[9999] flex items-center justify-center overflow-y-auto 
+      bg-black/75 px-3 py-5 sm:px-4 sm:py-6"
       onClick={(e) => {
         if (e.target === e.currentTarget) {
           onClose();
@@ -73,7 +74,7 @@ export default function Popup({
     >
       {/* POPUP CONTAINER */}
       <div
-        className="relative isolate my-auto w-full max-w-[610px] min-h-[520px] overflow-hidden border border-red-500"
+        className="relative isolate my-auto w-full max-w-[350px] min-h-[520px] overflow-hidden border border-red-500"
         style={{
           borderTopLeftRadius: "clamp(35px, 8vw, 100px)",
           borderBottomRightRadius: "clamp(35px, 8vw, 100px)",
@@ -101,12 +102,13 @@ export default function Popup({
         </button>
 
         {/* FORM AREA */}
-        <div className="relative z-10 flex w-full justify-center px-4 sm:justify-end sm:px-0">
-          <div className="mx-auto w-full max-w-[290px] py-[25px] sm:mx-0 sm:mr-[18px] sm:pb-[26px] sm:pt-[25px]">
-            {/* TITLE */}
-            <h2 className="mb-[20px] text-center text-[28px] font-bold tracking-tight text-white sm:text-[30px]">
-              Get a Quote
-            </h2>
+      <div className="relative z-10 flex w-full justify-center px-4 sm:px-0">
+  <div className="mx-auto w-full max-w-[290px] py-[25px] sm:pb-[26px] sm:pt-[25px]">
+
+    {/* TITLE */}
+    <h2 className="mb-[20px] text-center text-[28px] font-bold tracking-tight text-white sm:text-[30px]">
+      Get a Quote
+    </h2>
 
             {/* ENQUIRY FORM */}
             <form onSubmit={handleSubmit} className="space-y-4">
