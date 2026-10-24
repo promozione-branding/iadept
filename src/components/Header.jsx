@@ -92,14 +92,16 @@ export default function Header() {
           </div>
 
        {/* MOBILE HEADER */}
+{/* MOBILE HEADER */}
 <div className="lg:hidden">
-  <div className="flex h-[72px] items-center justify-between px-4">
+  {/* LOGO + MENU */}
+  <div className="flex h-[62px] items-center justify-between px-4">
     {/* LOGO */}
     <Link href="/" className="flex items-center">
       <img
         src="/logo-1 (1).webp"
         alt="i-Adept Marketing"
-        className="max-h-[55px] max-w-[190px] object-contain"
+        className="max-h-[48px] max-w-[190px] object-contain"
       />
     </Link>
 
@@ -145,9 +147,9 @@ export default function Header() {
     </button>
   </div>
 
-  {/* GST - LOGO KE BILKUL PAAS */}
-  <div className="px-4 pb-1">
-    <p className="text-[11px] leading-none text-gray-700">
+  {/* GST — LOGO KE JUST NEECHE */}
+  <div className="px-4 pb-2 -mt-[2px]">
+    <p className="text-[11px] leading-tight text-gray-700">
       GST: 07ABXPN5874D1Z1
     </p>
   </div>
@@ -155,7 +157,7 @@ export default function Header() {
   {/* MOBILE MENU */}
   {isOpen && (
     <div className="border-t border-gray-200 bg-white px-4 py-4">
-      {/* ...your existing menu... */}
+      {/* Apna existing mobile menu yahan rakhein */}
     </div>
   )}
 </div>
