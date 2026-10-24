@@ -18,7 +18,7 @@ export default function HomePage() {
       <Header />
       <Hero />
       <Products />
-      {/* <About />
+      <About />
       <Clientele />
       <Categories />
       <Industries />
@@ -27,7 +27,7 @@ export default function HomePage() {
       <MoreProducts />
       <ContactBar />
       <Footer />
-      <FloatingButtons />*/}
+      <FloatingButtons />
     </main> 
   );
 }
