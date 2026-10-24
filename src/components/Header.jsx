@@ -148,8 +148,8 @@ export default function Header() {
   </div>
 
   {/* GST — LOGO KE JUST NEECHE */}
-  <div className="px-4 pb-2 -mt-[2px]">
-    <p className="text-[11px] leading-tight text-gray-700">
+  <div className="px-6 pb-2 -mt-[14px]">
+    <p className="text-[13px] leading-tight text-gray-700">
       GST: 07ABXPN5874D1Z1
     </p>
   </div>
