@@ -55,7 +55,7 @@ const industries = [
 
 export default function Industries() {
   return (
-    <section id="industries" className="py-16 lg:py-24 bg-gray-50">
+    <section id="industries" className="py-10 lg:py-14 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl sm:text-4xl font-bold text-center text-gray-900 mb-12">
           Industries <span className="text-red-600">We Serve</span>
@@ -66,28 +66,14 @@ export default function Industries() {
           <div className="relative">
             <div className="aspect-square max-w-md mx-auto bg-white rounded-3xl border-2 border-red-200 shadow-lg flex items-center justify-center">
               <div className="text-center p-8">
-                <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-red-50 flex items-center justify-center">
-                  <svg
-                    className="w-12 h-12 text-red-500"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={1.5}
-                      d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
-                    />
-                  </svg>
-                </div>
-                <p className="text-gray-400 text-sm">Industry Illustration</p>
+                <img src="/cropped-iadept-logo-1.webp" alt="" />
+              
               </div>
             </div>
           </div>
 
           {/* Right - Industry list */}
-          <div className="space-y-5">
+          <div className="space-y-3">
             {industries.map((industry) => (
               <div
                 key={industry.id}

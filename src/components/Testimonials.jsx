@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { ChevronLeft, ChevronRight, Quote, Star } from "lucide-react";
 
 const testimonials = [
   {
@@ -26,93 +27,140 @@ const testimonials = [
 export default function Testimonials() {
   const [current, setCurrent] = useState(0);
 
-  const prev = () =>
-    setCurrent((c) => (c === 0 ? testimonials.length - 1 : c - 1));
-  const next = () =>
-    setCurrent((c) => (c === testimonials.length - 1 ? 0 : c + 1));
+  const visibleCount = 2;
 
-  const t = testimonials[current];
+  const maxIndex = testimonials.length - visibleCount;
+
+  const prev = () => {
+    setCurrent((c) => (c <= 0 ? maxIndex : c - 1));
+  };
+
+  const next = () => {
+    setCurrent((c) => (c >= maxIndex ? 0 : c + 1));
+  };
 
   return (
-    <section className="py-16 bg-gray-800 relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-red-500 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-orange-500 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
-      </div>
+    <section className="relative overflow-hidden py-10 sm:py-10 lg:py-15">
+      {/* Background Image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{
+          backgroundImage: "url('/testimonials-bg.webp')",
+        }}
+      />
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <h2 className="text-3xl sm:text-4xl font-bold text-center text-white mb-12">
-          Client <span className="text-red-500">Testimonials</span>
-        </h2>
+      {/* Black Overlay */}
+      <div className="absolute inset-0 bg-black/75" />
 
-        <div className="relative">
-          {/* Card */}
-          <div className="bg-gray-100 rounded-2xl p-8 sm:p-10 shadow-xl border border-orange-200/50">
-            <p className="text-gray-700 text-base sm:text-lg leading-relaxed text-center mb-8">
-              &ldquo;{t.text}&rdquo;
-            </p>
+      {/* Background Decoration */}
+      <div className="absolute -top-20 -left-20 h-72 w-72 rounded-full bg-red-600/15 blur-3xl" />
+      <div className="absolute -bottom-20 -right-20 h-72 w-72 rounded-full bg-orange-500/15 blur-3xl" />
 
-            <div className="text-center">
-              <p className="font-bold text-gray-900 text-lg">{t.name}</p>
-              <p className="text-sm text-gray-500 mt-1">{t.role}</p>
-            </div>
-          </div>
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Heading */}
+        <div className="mx-auto mb-12 max-w-2xl text-center">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-red-400">
+            Client Reviews
+          </p>
 
-          {/* Navigation arrows */}
-          <button
-            onClick={prev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 sm:-translate-x-6 w-10 h-10 bg-white shadow-md rounded-full flex items-center justify-center text-gray-600 hover:text-red-600 transition-colors"
-            aria-label="Previous testimonial"
-          >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 19l-7-7 7-7"
-              />
-            </svg>
-          </button>
+          <h2 className="text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
+            What Our{" "}
+            <span className="text-red-500">Clients Say</span>
+          </h2>
 
-          <button
-            onClick={next}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 sm:translate-x-6 w-10 h-10 bg-white shadow-md rounded-full flex items-center justify-center text-gray-600 hover:text-red-600 transition-colors"
-            aria-label="Next testimonial"
-          >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </button>
+          <p className="mt-4 text-sm leading-7 text-gray-300 sm:text-base">
+            Trusted by industry professionals for reliable products,
+            expert support, and smarter maintenance solutions.
+          </p>
         </div>
 
-        {/* Dots */}
-        <div className="flex justify-center gap-2 mt-8">
-          {testimonials.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setCurrent(i)}
-              className={`w-2.5 h-2.5 rounded-full transition-colors ${
-                i === current ? "bg-red-500" : "bg-gray-500"
-              }`}
-              aria-label={`Go to testimonial ${i + 1}`}
-            />
-          ))}
+        {/* Testimonials */}
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8">
+          {testimonials
+            .slice(current, current + visibleCount)
+            .map((t) => (
+              <div
+                key={t.id}
+                className="flex h-full flex-col rounded-2xl border border-white/15 bg-white/[0.96] p-6 shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:border-red-400/60 sm:p-8 lg:p-9"
+              >
+                {/* Quote and Rating */}
+                <div className="mb-6 flex items-center justify-between">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-red-50 text-red-600">
+                    <Quote size={25} />
+                  </div>
+
+                  <div className="flex gap-1 text-amber-500">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <Star
+                        key={star}
+                        size={17}
+                        fill="currentColor"
+                      />
+                    ))}
+                  </div>
+                </div>
+
+                {/* Testimonial Text */}
+                <p className="flex-1 text-base leading-8 text-gray-700">
+                  &ldquo;{t.text}&rdquo;
+                </p>
+
+                {/* Client Details */}
+                <div className="mt-8 flex items-center gap-4 border-t border-gray-200 pt-6">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gray-900 text-lg font-bold text-white">
+                    {t.name.charAt(0)}
+                  </div>
+
+                  <div className="min-w-0">
+                    <h3 className="font-bold text-gray-900">
+                      {t.name}
+                    </h3>
+
+                    <p className="mt-1 text-sm leading-6 text-gray-500">
+                      {t.role}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+        </div>
+
+        {/* Navigation */}
+        <div className="mt-9 flex items-center justify-center gap-5">
+          <button
+            type="button"
+            onClick={prev}
+            aria-label="Previous testimonials"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-white/30 text-white transition hover:border-red-500 hover:bg-red-600"
+          >
+            <ChevronLeft size={22} />
+          </button>
+
+          {/* Dots */}
+          <div className="flex items-center gap-2">
+            {Array.from({ length: maxIndex + 1 }).map((_, i) => (
+              <button
+                key={i}
+                type="button"
+                onClick={() => setCurrent(i)}
+                aria-label={`Go to testimonial group ${i + 1}`}
+                className={`h-2.5 rounded-full transition-all duration-300 ${
+                  current === i
+                    ? "w-8 bg-red-500"
+                    : "w-2.5 bg-white/50 hover:bg-white"
+                }`}
+              />
+            ))}
+          </div>
+
+          <button
+            type="button"
+            onClick={next}
+            aria-label="Next testimonials"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-white/30 text-white transition hover:border-red-500 hover:bg-red-600"
+          >
+            <ChevronRight size={22} />
+          </button>
         </div>
       </div>
     </section>

@@ -1,89 +1,193 @@
+
 "use client";
 
-const moreProducts = [
+import { useEffect, useRef, useState } from "react";
+
+const products = [
   {
-    id: 1,
-    name: "Full Body Scanner – Symcad (Non Security) III CX20 Compact 3D Body Scanner",
+    title:
+      "Full Body Scanner – Symcad (Non Security) III CX20 Compact 3D Body Scanner",
+    image: "/Full-Body-Scanner-Symcad-Non-Security-III-CX20-Compact-3D-Body-Scanner-1.webp",
   },
   {
-    id: 2,
-    name: "Vibration Monitoring System TPI 9038 Vibration Monitor",
+    title: "Vibration Monitoring System TPI 9038 Vibration Monitor",
+    image: "/Vibration-Monitoring-System-Vibration-Monitor-TPI-9038-1-300x300-1.webp",
   },
   {
-    id: 3,
-    name: "MTN/5000 – Microcontroller-Based Condition Monitoring System",
+    title:
+      "MTN/5000 – Microcontroller-Based Condition Monitoring System",
+    image: "/MTN_5000-–-Microcontroller-Based-Condition-Monitoring-System-1-300x300-1.webp",
   },
 ];
 
 const stats = [
-  { value: "0", label: "User Locations", color: "bg-cyan-400" },
-  { value: "0", label: "Innovative Contracts", color: "bg-cyan-300" },
-  { value: "0", label: "Happy Client", color: "bg-cyan-200" },
+  { value: 1200, suffix: "+", label: "User Locations" },
+  { value: 50, suffix: "+", label: "Innovative Contracts" },
+  { value: 2000, suffix: "+", label: "Happy Client" },
 ];
 
-export default function MoreProducts() {
+function Counter({ value, suffix, active }) {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!active) return;
+
+    let frame;
+    const duration = 1800;
+    let startTime;
+
+    const animate = (timestamp) => {
+      if (!startTime) startTime = timestamp;
+
+      const progress = Math.min(
+        (timestamp - startTime) / duration,
+        1
+      );
+
+      // Smooth ease-out animation
+      const eased = 1 - Math.pow(1 - progress, 4);
+
+      setCount(Math.floor(value * eased));
+
+      if (progress < 1) {
+        frame = requestAnimationFrame(animate);
+      } else {
+        setCount(value);
+      }
+    };
+
+    frame = requestAnimationFrame(animate);
+
+    return () => cancelAnimationFrame(frame);
+  }, [value, active]);
+
   return (
-    <section className="py-16 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-3 gap-8 items-start">
-          {/* Products */}
-          <div className="lg:col-span-2">
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">
+    <>
+      {count.toLocaleString("en-US")}
+      {suffix}
+    </>
+  );
+}
+
+export default function MoreProductsSection() {
+  const statsRef = useRef(null);
+  const [active, setActive] = useState(false);
+
+  useEffect(() => {
+    const element = statsRef.current;
+    if (!element) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setActive(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.25 }
+    );
+
+    observer.observe(element);
+
+    return () => observer.disconnect();
+  }, []);
+
+  const whatsappNumber = "919876543210"; // Replace with your number
+
+  const contactWhatsApp = (product) => {
+    const message = `Hello, I am interested in ${product}. Please share more details.`;
+
+    window.open(
+      `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`,
+      "_blank",
+      "noopener,noreferrer"
+    );
+  };
+
+  return (
+    <section className="w-full overflow-hidden bg-white">
+      <div className="mx-auto max-w-[1600px] px-4 py-8 sm:px-6 lg:px-0 lg:py-5">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_1.05fr] lg:gap-0">
+          {/* LEFT: MORE PRODUCTS */}
+          <div className="relative z-10 min-w-0 bg-[#f3f3f3] px-3 py-5 sm:px-5 lg:py-5 lg:pr-6">
+            <h2 className="mb-6 text-2xl font-extrabold tracking-tight text-[#252525] sm:text-3xl">
               More Products
             </h2>
 
-            <div className="grid sm:grid-cols-3 gap-5">
-              {moreProducts.map((product) => (
-                <div
-                  key={product.id}
-                  className="bg-white border border-gray-100 rounded-xl shadow-sm overflow-hidden hover:shadow-md transition-shadow"
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+              {products.map((product, index) => (
+                <article
+                  key={product.title}
+                  className="group flex min-w-0 flex-col bg-white p-2.5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:p-2.5"
                 >
-                  <div className="aspect-[4/3] bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center">
-                    <svg
-                      className="w-12 h-12 text-gray-300"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={1.5}
-                        d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
-                      />
-                    </svg>
+                  <div className="mb-3 flex aspect-square items-center justify-center overflow-hidden bg-[#f7f5f3]">
+                    <img
+                      src={product.image}
+                      alt={product.title}
+                      className="h-full w-full object-contain p-1 transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                    />
                   </div>
-                  <div className="p-4">
-                    <h3 className="text-sm font-semibold text-gray-800 line-clamp-3 min-h-[60px]">
-                      {product.name}
-                    </h3>
-                    <a
-                      href="https://wa.me/919810010218"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-3 w-full inline-flex items-center justify-center gap-2 px-3 py-2 bg-green-500 hover:bg-green-600 text-white text-sm font-medium rounded-lg transition-colors"
-                    >
-                      WhatsApp Now
-                    </a>
-                  </div>
-                </div>
+
+                  <h3 className="mb-3 flex-1 text-center text-sm font-bold leading-[1.4] text-[#171717] sm:text-[13px] md:text-sm">
+                    {product.title}
+                  </h3>
+
+                  <button
+                    type="button"
+                    onClick={() => contactWhatsApp(product.title)}
+                    className="mt-auto w-full rounded-[3px] bg-[#08b50b] px-2 py-3 text-sm font-semibold text-white transition-colors duration-300 hover:bg-[#079409] focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2"
+                  >
+                    WhatsApp Now
+                  </button>
+                </article>
               ))}
             </div>
           </div>
 
-          {/* Stats cards */}
-          <div className="space-y-3">
-            {stats.map((stat, i) => (
-              <div
-                key={stat.label}
-                className={`${stat.color} rounded-xl p-6 text-center shadow-sm`}
-              >
-                <p className="text-4xl font-bold text-gray-800">{stat.value}</p>
-                <p className="text-sm font-semibold text-red-700 mt-1">
-                  {stat.label}
-                </p>
+          {/* RIGHT: IMAGE + COUNTERS */}
+          <div
+            ref={statsRef}
+            className="relative min-w-0 lg:min-h-[400px]"
+          >
+            <div className="relative grid min-h-[420px] grid-cols-1 sm:grid-cols-2 lg:min-h-[450px]">
+              {/* Center product / equipment image */}
+              <div className="relative z-20 flex items-center justify-center px-4 py-4 sm:px-2 lg:absolute lg:left-50 
+              lg:top-1/2 lg:w-[53%] lg:-translate-x-1/2 lg:-translate-y-1/2 lg:px-0 lg:py-0">
+                <div className="h-[250px] w-full max-w-[350px] overflow-hidden rounded-xl border-4 border-white bg-[#dfe3e3] shadow-[0_5px_18px_rgba(0,0,0,0.25)] sm:h-[360px] lg:h-[510px] lg:max-w-none">
+                  <img
+                    src="/imgg.webp"
+                    alt="Industrial condition monitoring equipment"
+                    className="h-full w-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
               </div>
-            ))}
+
+              {/* Turquoise statistics panel */}
+              <div className="relative col-span-1 flex flex-col justify-center gap-8 bg-[#42eee0] px-5 py-8 sm:col-span-2 sm:gap-7 sm:pl-[42%] sm:pr-5 lg:col-span-1 lg:col-start-1 lg:col-end-3 lg:items-end lg:gap-8 lg:py-8 lg:pl-[40%] lg:pr-8">
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#42eee0] via-[#42eee0] to-[#30dcd0]" />
+
+                {stats.map((stat) => (
+                  <div
+                    key={stat.label}
+                    className="relative z-10 w-full text-center sm:text-center lg:max-w-[300px]"
+                  >
+                    <div className="text-4xl font-extrabold leading-none tracking-tight text-white sm:text-4xl md:text-5xl">
+                      <Counter
+                        value={stat.value}
+                        suffix={stat.suffix}
+                        active={active}
+                      />
+                    </div>
+
+                    <p className="mt-2 text-base font-bold text-[#ff2929] sm:text-lg">
+                      {stat.label}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>

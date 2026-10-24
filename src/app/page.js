@@ -19,15 +19,14 @@ export default function HomePage() {
       <Hero />
       <Products />
       <About />
-      {/* {/* <Clientele />
-      <Categories />
-      <Industries />
-      <Testimonials />
-      <ContactForm />
-      <MoreProducts />
-      <ContactBar />
-      <Footer />
-      <FloatingButtons /> */}
+       <Clientele />
+     <Categories />
+        <Industries />
+       <Testimonials />
+    <ContactForm />
+  <MoreProducts /> 
+     <ContactBar />
+
     </main> 
   );
 }

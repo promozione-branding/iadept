@@ -4,8 +4,8 @@ import Link from "next/link";
 
 export default function About() {
   return (
-    <section id="about" className="py-16 lg:py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="about" className="py-10 lg:py-14 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row ">
         <div className="max-w-3xl">
           <p className="text-sm font-semibold text-red-600 uppercase tracking-wider mb-3">
             ABOUT US
@@ -37,7 +37,13 @@ export default function About() {
             Learn More
           </Link>
         </div>
+
+         <div>
+        <img src="/about-us.webp.webp" alt="" />
       </div>
+      </div>
+
+     
     </section>
   );
 }

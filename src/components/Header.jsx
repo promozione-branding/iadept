@@ -1,7 +1,9 @@
+
 "use client";
 
 import Link from "next/link";
 import { useState } from "react";
+import Popup from "./Popup";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,10 +30,8 @@ export default function Header() {
     <>
       <header className="sticky top-0 z-50 bg-white border-t border-gray-200">
         <div className="w-full">
-
-          {/* ================= DESKTOP HEADER ================= */}
+          {/* DESKTOP HEADER */}
           <div className="hidden lg:flex items-start h-[92px]">
-
             {/* LOGO */}
             <div className="relative shrink-0">
               <Link
@@ -89,10 +89,10 @@ export default function Header() {
             </div>
           </div>
 
-          {/* ================= MOBILE HEADER ================= */}
+          {/* MOBILE HEADER */}
           <div className="lg:hidden">
             <div className="flex items-center justify-between h-[72px] px-4">
-
+              {/* LOGO */}
               <Link href="/" className="flex items-center">
                 <img
                   src="/logo-1 (1).webp"
@@ -101,11 +101,13 @@ export default function Header() {
                 />
               </Link>
 
+              {/* MOBILE MENU BUTTON */}
               <button
                 type="button"
                 onClick={() => setIsOpen(!isOpen)}
                 className="w-11 h-11 flex items-center justify-center text-gray-800"
                 aria-label="Toggle menu"
+                aria-expanded={isOpen}
               >
                 {isOpen ? (
                   <svg
@@ -152,7 +154,6 @@ export default function Header() {
             {isOpen && (
               <div className="border-t border-gray-200 bg-white px-4 py-4">
                 <nav className="flex flex-col">
-
                   {navLinks.map((link) => (
                     <Link
                       key={link.name}
@@ -161,13 +162,14 @@ export default function Header() {
                       className={`py-3 text-[16px] border-b border-gray-100 ${
                         link.active
                           ? "text-red-600"
-                          : "text-gray-800"
+                          : "text-gray-800 hover:text-red-600"
                       }`}
                     >
                       {link.name}
                     </Link>
                   ))}
 
+                  {/* MOBILE GET A QUOTE */}
                   <button
                     type="button"
                     onClick={openQuote}
@@ -180,7 +182,6 @@ export default function Header() {
                     <span>GET A QUOTE</span>
                     <span className="text-[21px]">→</span>
                   </button>
-
                 </nav>
               </div>
             )}
@@ -188,106 +189,11 @@ export default function Header() {
         </div>
       </header>
 
-      {/* =====================================================
-          GET A QUOTE POPUP
-      ===================================================== */}
-      {quoteOpen && (
-        <div
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/75 px-4 py-6"
-          onClick={(e) => {
-            if (e.target === e.currentTarget) {
-              closeQuote();
-            }
-          }}
-        >
-          {/* POPUP */}
-          <div
-            className="relative w-full max-w-[610px] min-h-[520px] bg-[#8b8b8b] border border-red-500 overflow-hidden"
-            style={{
-              borderTopLeftRadius: "100px",
-              borderBottomRightRadius: "100px",
-            }}
-          >
-
-            {/* CLOSE BUTTON */}
-            <button
-              type="button"
-              onClick={closeQuote}
-              aria-label="Close"
-              className="absolute top-[16px] right-[17px] z-20 text-white text-[25px] font-light leading-none hover:text-red-200 transition-colors cursor-pointer"
-            >
-              ×
-            </button>
-
-            {/* FORM AREA */}
-            <div className="w-full flex justify-end">
-              <div className="w-[290px] mr-[18px] pt-[25px] pb-[26px]">
-
-                {/* TITLE */}
-                <h2 className="text-white text-[30px] font-bold text-center mb-[20px] tracking-tight">
-                  Get a Quote
-                </h2>
-
-                {/* NAME */}
-                <input
-                  type="text"
-                  placeholder="Your Name"
-                  className="w-full h-[46px] bg-white border border-gray-500 px-4 text-[15px] text-gray-700 outline-none placeholder:text-gray-500 mb-[16px]"
-                />
-
-                {/* EMAIL */}
-                <input
-                  type="email"
-                  placeholder="Email ID"
-                  className="w-full h-[46px] bg-white border border-gray-500 px-4 text-[15px] text-gray-700 outline-none placeholder:text-gray-500 mb-[16px]"
-                />
-
-                {/* PHONE */}
-                <div className="w-full h-[46px] bg-white border border-gray-500 flex items-center mb-[16px]">
-
-                  <div className="flex items-center gap-1 px-2 h-full border-r border-gray-200">
-                    <span className="text-[20px] leading-none">
-                      🇮🇳
-                    </span>
-
-                    <span className="text-gray-500 text-[11px]">
-                      ▾
-                    </span>
-                  </div>
-
-                  <input
-                    type="tel"
-                    placeholder="081234 56789"
-                    className="flex-1 h-full bg-transparent px-3 text-[15px] text-gray-700 outline-none placeholder:text-gray-500"
-                  />
-                </div>
-
-                {/* PLACE */}
-                <input
-                  type="text"
-                  placeholder="Place"
-                  className="w-full h-[46px] bg-white border border-gray-500 px-4 text-[15px] text-gray-700 outline-none placeholder:text-gray-500 mb-[16px]"
-                />
-
-                {/* MESSAGE */}
-                <textarea
-                  placeholder="Your Message"
-                  className="w-full h-[103px] bg-white border border-gray-500 px-4 py-2 text-[15px] text-gray-700 outline-none resize-none placeholder:text-gray-500 mb-[15px]"
-                />
-
-                {/* SUBMIT */}
-                <button
-                  type="button"
-                  className="w-full h-[53px] bg-[#e10d08] hover:bg-[#c90905] text-white text-[16px] font-medium rounded-[4px] transition-colors cursor-pointer"
-                >
-                  Submit Your Request
-                </button>
-
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* SEPARATE QUOTE POPUP COMPONENT */}
+      <Popup
+        isOpen={quoteOpen}
+        onClose={closeQuote}
+      />
     </>
   );
 }

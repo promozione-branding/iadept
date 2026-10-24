@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const products = [
   {
@@ -55,35 +55,18 @@ export default function Products() {
     message: "",
   });
 
-  // Listen for the Header's existing quote popup event.
-  useEffect(() => {
-    const handleOpenQuote = (event) => {
-      const productName = event.detail?.productName || "";
-
-      setFormData((prev) => ({
-        ...prev,
-        message: productName
-          ? `I want a quote for: ${productName}`
-          : "",
-      }));
-    };
-
-    window.addEventListener("openQuotePopup", handleOpenQuote);
-
-    return () => {
-      window.removeEventListener("openQuotePopup", handleOpenQuote);
-    };
-  }, []);
-
-  // Open the existing Header popup with the selected product.
-  const handleProductImageClick = (productName) => {
+  // Open Header popup with selected product
+  const handleProductQuote = (productName) => {
     window.dispatchEvent(
       new CustomEvent("openQuotePopup", {
-        detail: { productName },
+        detail: {
+          productName,
+        },
       })
     );
   };
 
+  // Sticky form input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -93,6 +76,7 @@ export default function Products() {
     }));
   };
 
+  // Sticky quote form submit
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -125,20 +109,11 @@ export default function Products() {
                   className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden border border-gray-100"
                 >
                   {/* CLICKABLE PRODUCT IMAGE */}
-                  <div
-                    className="aspect-square bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center relative overflow-hidden cursor-pointer"
-                    onClick={() =>
-                      handleProductImageClick(product.name)
-                    }
-                    role="button"
-                    tabIndex={0}
+                  <button
+                    type="button"
+                    onClick={() => handleProductQuote(product.name)}
                     aria-label={`Get a quote for ${product.name}`}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" || e.key === " ") {
-                        e.preventDefault();
-                        handleProductImageClick(product.name);
-                      }
-                    }}
+                    className="block w-full aspect-square bg-gradient-to-br from-gray-100 to-gray-200 relative overflow-hidden cursor-pointer"
                   >
                     <img
                       src={product.image}
@@ -146,7 +121,7 @@ export default function Products() {
                       loading="lazy"
                       className="w-full h-full object-contain hover:scale-105 transition-transform duration-300"
                     />
-                  </div>
+                  </button>
 
                   {/* PRODUCT DETAILS */}
                   <div className="p-3 sm:p-4">
@@ -178,9 +153,7 @@ export default function Products() {
                     {/* GET A QUOTE BUTTON */}
                     <button
                       type="button"
-                      onClick={() =>
-                        handleProductImageClick(product.name)
-                      }
+                      onClick={() => handleProductQuote(product.name)}
                       className="mt-2 w-full px-3 py-2 border border-red-600 text-red-600 hover:bg-red-600 hover:text-white text-xs sm:text-sm font-medium rounded-lg transition-colors"
                     >
                       Get a Quote
