@@ -87,7 +87,7 @@ export default function Clientele() {
   };
 
   return (
-    <section className="bg-gray-100 py-10 sm:py-5">
+    <section className="bg-gray-100 py-14 sm:py-5">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-10 text-center">
           <p className="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-red-600">
@@ -152,7 +152,7 @@ export default function Clientele() {
                   alt={client.name}
                   loading="lazy"
                   draggable="false"
-                  className="h-full w-full object-contain grayscale transition duration-300 hover:grayscale-0"
+                 className="h-full w-full object-contain transition duration-300"
                 />
               </div>
             ))}
