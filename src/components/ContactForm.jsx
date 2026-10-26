@@ -100,18 +100,18 @@ export default function ContactForm() {
               <span className="text-red-600">Message</span>
             </h2>
 
-            <p className="mb-8 text-sm leading-7 text-gray-600 sm:text-base">
+            <p className="mb-8 text-sm leading-7 text-gray-600 sm:text-base hidden md:block">
               Have a question or need product information? Fill out the
               form below and our team will get in touch with you.
             </p>
 
-            <form onSubmit={handleSubmit} className="space-y-5">
+            <form onSubmit={handleSubmit} className="space-y-3">
               {/* Name and Email */}
-              <div className="grid gap-5 sm:grid-cols-2">
+              <div className="grid gap-3 sm:grid-cols-2">
                 <div>
                   <label
                     htmlFor="contact-name"
-                    className="mb-2 block text-sm font-medium text-gray-700"
+                    className="mb-1 block text-sm font-medium text-gray-700"
                   >
                     Your Name
                   </label>
@@ -132,7 +132,7 @@ export default function ContactForm() {
                 <div>
                   <label
                     htmlFor="contact-email"
-                    className="mb-2 block text-sm font-medium text-gray-700"
+                    className="mb-1 block text-sm font-medium text-gray-700"
                   >
                     Your Email
                   </label>
@@ -152,11 +152,11 @@ export default function ContactForm() {
               </div>
 
               {/* Phone and Place */}
-              <div className="grid gap-5 sm:grid-cols-2">
+              <div className="grid gap-3 sm:grid-cols-2">
                 <div>
                   <label
                     htmlFor="contact-phone"
-                    className="mb-2 block text-sm font-medium text-gray-700"
+                    className="mb-1 block text-sm font-medium text-gray-700"
                   >
                     Your Phone
                   </label>

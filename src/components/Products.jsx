@@ -164,7 +164,7 @@ export default function Products() {
 
                     {/* PRODUCT DETAILS */}
                     <div className="flex flex-1 flex-col border-t border-gray-100 p-3 sm:p-4">
-                      <h3 className="line-clamp-3 min-h-[50px] text-xs font-semibold leading-5 text-gray-800 sm:text-sm">
+                      <h3 className="line-clamp-3 min-h-[50px] text-xs font-semibold leading-5 text-gray-800 sm:text-[13px]">
                         {product.name}
                       </h3>
 
