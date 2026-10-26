@@ -125,7 +125,8 @@ export default function ContactForm() {
                     placeholder="Enter your name"
                     autoComplete="name"
                     required
-                    className="w-full rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 text-gray-800 outline-none transition placeholder:text-gray-400 focus:border-red-500 focus:bg-white focus:ring-2 focus:ring-red-100"
+                    className="w-full rounded-lg border border-gray-200 bg-gray-50 px-4 
+                    py-3 text-gray-800 outline-none transition placeholder:text-gray-400 focus:border-red-500 focus:bg-white focus:ring-2 focus:ring-red-100"
                   />
                 </div>
 
@@ -163,6 +164,8 @@ export default function ContactForm() {
 
                   <input
                     id="contact-phone"
+                     minlength="10"
+  maxlength="10"
                     type="tel"
                     name="phone"
                     value={formData.phone}

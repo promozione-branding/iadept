@@ -135,6 +135,8 @@ export default function Popup({
               <input
                 type="tel"
                 name="phone"
+                 minlength="10"
+  maxlength="10"
                 placeholder="10-digit phone number"
                 autoComplete="tel"
                 defaultValue={initialValues.phone || ""}

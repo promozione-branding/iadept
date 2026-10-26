@@ -240,6 +240,8 @@ export default function Products() {
                     type="tel"
                     name="phone"
                     value={formData.phone}
+                     minlength="10"
+                      maxlength="10"
                     onChange={handleChange}
                     placeholder="Phone Number"
                     autoComplete="tel"
