@@ -203,7 +203,7 @@ export default function Products() {
             </div>
 
             {/* STICKY QUOTE FORM — UNCHANGED */}
-            <aside id="quote" className="shrink-0 lg:w-80">
+            <aside id="quote" className="shrink-0 lg:w-80 hidden md:block ">
               <div className="rounded-xl bg-red-900 p-5 text-white shadow-xl sm:p-6 lg:sticky lg:top-24">
                 <h3 className="mb-2 text-center text-2xl font-bold">
                   Get a Quote
