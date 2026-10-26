@@ -5,7 +5,6 @@ import { useRef, useEffect, useState } from "react";
 
 const clients = [
   { id: 1, name: "Client 1", image: "/2 (46).webp" },
-  { id: 2, name: "Client 2", image: "/2 webp" },
   { id: 3, name: "Client 3", image: "/3 (33).webp" },
   { id: 4, name: "Client 4", image: "/5 (11).webp" },
   { id: 5, name: "Client 5", image: "/6 (8).webp" },
@@ -136,7 +135,7 @@ export default function Clientele() {
             onMouseLeave={() => pauseScroll(false)}
             onTouchStart={() => pauseScroll(true)}
             onTouchEnd={() => pauseScroll(false)}
-            className="flex gap-5 overflow-x-auto px-7 py-4 sm:gap-7 sm:px-10"
+            className="flex gap-5 overflow-x-auto px-7 py-3 sm:gap-7 sm:px-10"
             style={{
               scrollbarWidth: "none",
               msOverflowStyle: "none",
@@ -182,12 +181,6 @@ export default function Clientele() {
             </svg>
           </button>
         </div>
-
-        <p className="mt-3 text-center text-xs text-gray-400">
-          {isPaused
-            ? "Carousel paused"
-            : "Our valued clients · Continuous scroll"}
-        </p>
       </div>
 
       <style jsx>{`

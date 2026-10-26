@@ -17,14 +17,14 @@ export default function HomePage() {
     <main className="min-h-screen">
       <Header />
       <Hero />
+        <Clientele /> 
       <Products />
-      <About />
-       <Clientele />
-     <Categories />
+      <About />   
+   <Categories />
         <Industries />
+        <MoreProducts /> 
        <Testimonials />
     <ContactForm />
-  <MoreProducts /> 
      <ContactBar />
 
     </main> 
