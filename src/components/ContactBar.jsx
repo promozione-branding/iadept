@@ -81,7 +81,6 @@ function ContactItem({ item }) {
 
 export function FloatingContactButtons() {
   const phoneNumber = "919810010218";
-  const whatsappNumber = "919810010218";
 
   return (
     <div
@@ -109,7 +108,7 @@ export function FloatingContactButtons() {
 
       {/* WhatsApp Button */}
       <a
-        href={`https://wa.me/${whatsappNumber}`}
+        href="https://walink.me/gidahh"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat on WhatsApp"
@@ -154,7 +153,7 @@ export default function Contactbar() {
             px-5 py-10
             sm:px-8
             md:px-10
-            lg:px-12
+            lg:px-10
           "
         >
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-5 lg:gap-8">

@@ -10,41 +10,49 @@ const products = [
     id: 1,
     name: "107 VF-BE Shock Pulse Bearing Analyzer",
     image: "/pro5-1-1.webp",
+    whatsApp : "https://walink.me/gidahh",
   },
   {
     id: 2,
     name: "Bearing Analyzer – Vibrometer CM-21",
     image: "/Bearing-Analyzer-Vibrometer-CM-21-1 (1).webp",
+     whatsApp : "https://walink.me/gidahh",
   },
   {
     id: 3,
     name: "Factory Manager – Vibration Data Management System",
     image: "/Factory-Manager-1 (1).webp",
+       whatsApp : "https://walink.me/gidahh",
   },
   {
     id: 4,
     name: "Multi Cylinder Diesel Engine Performance Analyzer DK-100",
     image: "/Multi-Cylinder-Diesel-Engine-Performance-Analyzer-DK-100 (1).webp",
+       whatsApp : "https://walink.me/gidahh",
   },
   {
     id: 5,
     name: "Eye Tracker – Argus",
     image: "/Eye-Tracker-Argus (1).webp",
+       whatsApp : "https://walink.me/k19612",
   },
   {
     id: 6,
     name: 'Eye Tracking Device Pupil Labs "CORE"',
     image: "/pro17-1.webp",
+    whatsApp : "https://walink.me/k19612",
   },
   {
     id: 7,
     name: "EyeLink 1000 Plus",
     image: "/pro15-1.webp",
+    whatsApp : "https://walink.me/k19612",
   },
   {
     id: 8,
     name: "EyeLink Portable Duo",
     image: "/pro14-1.webp",
+    whatsApp : "https://walink.me/k19612",
   },
 ];
 
@@ -113,10 +121,12 @@ export default function Products() {
     }
   };
 
-  const whatsappLink = (productName) =>
-    `https://wa.me/919810010218?text=${encodeURIComponent(
-      `Hello, I want to enquire about ${productName}. Please share the details.`
-    )}`;
+  // const whatsappLink = (productName) =>
+  //   `https://wa.me/919810010218?text=${encodeURIComponent(
+  //     `Hello, I want to enquire about ${productName}. Please share the details.`
+  //   )}`;
+
+      const whatsappNumber = "919810010218";
 
   return (
     <>
@@ -144,7 +154,9 @@ export default function Products() {
                 {products.map((product) => (
                   <article
                     key={product.id}
-                    className="group flex min-w-0 flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                    className="group flex min-w-0 flex-col overflow-hidden rounded-xl border
+                     border-gray-200 bg-white shadow-sm transition-all duration-300 
+                     hover:-translate-y-1 hover:shadow-lg"
                   >
                     {/* CLICKABLE PRODUCT IMAGE */}
                     <button
@@ -164,14 +176,15 @@ export default function Products() {
 
                     {/* PRODUCT DETAILS */}
                     <div className="flex flex-1 flex-col border-t border-gray-100 p-3 sm:p-4">
-                      <h3 className="line-clamp-3 min-h-[50px] text-xs font-semibold leading-5 text-gray-800 sm:text-[13px]">
+                      <h3 className="line-clamp-3 min-h-[50px] text-xs font-semibold leading-5
+                       text-gray-800 sm:text-[13px]">
                         {product.name}
                       </h3>
 
                       <div className="mt-0 space-y-2 pt-4">
                         {/* WHATSAPP BUTTON — UNCHANGED */}
                         <a
-                          href={whatsappLink(product.name)}
+                       href={product.whatsApp}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="inline-flex min-h-10 w-full items-center justify-center gap-1.5 rounded-lg bg-green-600 px-2 py-2 text-xs font-semibold text-white transition-colors hover:bg-green-700 sm:gap-2 sm:text-sm"

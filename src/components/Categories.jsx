@@ -112,9 +112,7 @@ export default function Categories() {
 {/* WHATSAPP CTA */}
 <div className="mt-8 text-center sm:mt-10">
   <a
-    href={`https://wa.me/919810010218?text=${encodeURIComponent(
-      "Hello, I want to enquire about bulk prices for your products and categories. Please share the pricing details."
-    )}`}
+    href="https://walink.me/gidahh"
     target="_blank"
     rel="noopener noreferrer"
     className="inline-flex items-center justify-center gap-2 border border-green-600 bg-green-600 px-5 py-3 text-sm font-semibold text-white transition-colors duration-300 hover:bg-green-700 sm:px-6 sm:text-base"

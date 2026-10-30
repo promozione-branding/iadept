@@ -56,7 +56,7 @@ export default function ContactForm() {
   return (
     <section
       id="contact"
-      className="relative isolate overflow-hidden py-10 sm:py-10 lg:py-15"
+      className="relative isolate overflow-hidden py-10 sm:py-10 lg:py-10"
     >
       {/* World Map Background */}
       <div

@@ -117,15 +117,13 @@ export default function MoreProductsSection() {
   };
 
   // WhatsApp
-  const contactWhatsApp = (product) => {
-    const message = `Hello, I am interested in ${product}. Please share more details.`;
-
-    window.open(
-      `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`,
-      "_blank",
-      "noopener,noreferrer"
-    );
-  };
+const contactWhatsApp = () => {
+  window.open(
+    "https://walink.me/gidahh",
+    "_blank",
+    "noopener,noreferrer"
+  );
+};
 
   return (
     <>
@@ -192,16 +190,13 @@ export default function MoreProductsSection() {
                       {product.title}
                     </h3>
 
-                    {/* WHATSAPP BUTTON */}
                     <button
-                      type="button"
-                      onClick={() =>
-                        contactWhatsApp(product.title)
-                      }
-                      className="mt-auto w-full rounded-[3px] bg-[#08b50b] px-2 py-2.5 text-xs font-semibold text-white transition-colors duration-300 hover:bg-[#079409] focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2 sm:py-3 sm:text-sm"
-                    >
-                      WhatsApp Now
-                    </button>
+  type="button"
+  onClick={contactWhatsApp}
+  className="mt-auto w-full rounded-[3px] bg-[#08b50b] px-2 py-2.5 text-xs font-semibold text-white transition-colors duration-300 hover:bg-[#079409] focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2 sm:py-3 sm:text-sm"
+>
+  WhatsApp Now
+</button>
                   </article>
                 ))}
 

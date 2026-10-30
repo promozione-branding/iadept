@@ -36,19 +36,21 @@ export default function About() {
   {/* Get Bulk Pricing */}
   <Link
     href="#contact"
-    className="inline-flex min-h-[56px] items-center justify-center gap-3 rounded-lg bg-[#477f00] px-6 py-4 text-sm font-bold tracking-wide text-white transition-all duration-300 hover:bg-[#386600] sm:min-w-[245px] sm:text-base"
+    className="inline-flex min-h-[56px] items-center justify-center gap-3 rounded-lg bg-black px-6 py-4 text-sm font-bold tracking-wide text-white transition-all duration-300 hover:bg-[#386600] sm:min-w-[245px] sm:text-base"
   >
     GET BULK PRICING
     <span className="text-xl leading-none">↓</span>
   </Link>
 
   {/* WhatsApp Bulk */}
-  <a
-    href="https://wa.me/919810010218?text=Hello%2C%20I%20am%20interested%20in%20bulk%20pricing."
-    target="_blank"
-    rel="noopener noreferrer"
-    className="inline-flex min-h-[56px] items-center justify-center gap-3 rounded-lg bg-[#14231e] px-6 py-4 text-sm font-bold tracking-wide text-white transition-all duration-300 hover:bg-[#203b30] sm:min-w-[230px] sm:text-base"
-  >
+ <a
+                       href="https://walink.me/gidahh"
+                          target="_blank"
+                          rel="noopener noreferrer"
+    className="inline-flex min-h-[56px] items-center justify-center gap-3 rounded-lg
+     bg-green-600 px-6 py-4 text-sm font-bold tracking-wide text-white transition-all duration-300 
+     hover:bg-[#203b30] sm:min-w-[230px] sm:text-base"
+                        >
     WHATSAPP BULK
 
     <svg
